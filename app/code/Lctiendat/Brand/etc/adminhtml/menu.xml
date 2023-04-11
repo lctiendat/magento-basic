@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add dependsOnConfig="brand/general/enable" id="Lctiendat_Brand::parent" title="Brand" module="Lctiendat_Brand" sortOrder="1" resource="Lctiendat_Brand::parent"/>
+        <add id="Lctiendat_Brand::index" title="Manage Brands" module="Lctiendat_Brand" sortOrder="1" action="brands/brand/index" resource="Lctiendat_Brand::index" parent="Lctiendat_Brand::parent"/>
+    </menu>
+</config>

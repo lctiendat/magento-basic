@@ -1,0 +1,31 @@
+<?php
+$data = $block->getData('brands');
+$helper = \Magento\Framework\App\ObjectManager::getInstance()->get('Lctiendat\Brand\Helper\Data'); 
+$mediaUrl = $block->getData('mediaURL');
+?>
+
+<?php if($helper->isEnable() === "1") { ?>
+
+<div class="container mt-5 pb-5 text-center">
+    <div class="row">
+        <?php foreach($data as $item) { ?>
+             <div class="col-3">
+                <img src="<?= $mediaUrl . $item['image'] ?>" alt="this is a image">
+  <h3><?= $item['title'] ?></h3>
+
+             </div>
+            <?php }?>
+    </div>
+</div>
+
+<?php }  else { ?>
+    <center>Module is disabled , please contact to system admin</center>
+    <?php } ?>
+
+
+    <style>
+        h3{
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    </style>

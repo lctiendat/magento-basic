@@ -1,0 +1,15 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="lctiendat_manager_brand">
+        <column xsi:type="int" name="brand_id" identity="true" unsigned="true" nullable="false" comment="Brand Id"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Title"/>
+        <column xsi:type="varchar" name="description"  nullable="false" comment="Description"/>
+        <column xsi:type="int" name="sort_order"  nullable="true" comment="Sort Order"/>
+        <column xsi:type="varchar" name="image"  comment="Image of brand"/>
+        <column xsi:type="boolean" name="is_active" nullable="false" default="true" comment="Status Brand"/>
+        
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="brand_id"/>
+        </constraint>
+   </table>
+</schema>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../vendor/magento/framework/Module/etc/module.xsd">
+  <head>
+    <css src="css/local.css" />
+    <css src="css/bootstrap.min.css" />
+    <css src="css/owl.carousel.min.css" />
+    <css src="css/owl.theme.default.min.css" />
+    <script src="js/_carousel.js" />
+  </head>
+</page>
+

@@ -1,0 +1,12 @@
+<?php
+$data = $block->getCurrentCategory();
+$description = $data->getData('custom_description'); 
+$thumbnail = $data->getData('custom_thumbnail');
+?>
+
+<div class="cate-infor">
+    <div class="row">
+        <div class="col-6 cate__des"><?= $description ?></div>
+        <div class="col-6"> <img src="<?= $thumbnail ?>" alt="this is a image"></div>
+    </div>
+</div>

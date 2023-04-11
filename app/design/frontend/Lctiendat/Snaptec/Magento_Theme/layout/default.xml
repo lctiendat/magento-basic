@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="1column"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="default_head_blocks"/>
+    <body>
+        <referenceContainer name="header.container">
+            <container htmlTag="div" name="page-header" htmlClass="container">
+                <container htmlTag="div" name="header-top" htmlClass="d-flex justify-content-between">
+                    <container htmlTag="div" name="header-nav-left" />
+                    <container htmlTag="div" name="header-nav-main" />
+                    <container htmlTag="div" name="header-nav-right" htmlClass="d-flex" />
+                </container>
+                <container htmlTag="div" name="header-nav"/>
+            </container>
+        </referenceContainer>
+        <move element="logo" destination="header-nav-main" />
+        <move element="top.search" destination="header-nav-right" />
+        <move element="authorization-link" destination="header-nav-right" />
+        <move element="wish-list-link" destination="header-nav-right" before="minicart" />
+        <move element="minicart" destination="header-nav-right" />
+        <!-- <referenceBlock name="top.links" remove="true"/> -->
+              <!-- <referenceBlock name="header.container" remove="true" />   -->
+
+    </body>
+</page>

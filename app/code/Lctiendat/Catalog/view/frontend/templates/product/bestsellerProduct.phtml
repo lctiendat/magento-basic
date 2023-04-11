@@ -1,0 +1,72 @@
+
+
+<?php if ($products = $block->getNewProducts()) : ?>
+    <div class="recommendations">
+        <div class="container">
+            <div class="row">
+                <div class="col-11 mx-auto">
+                    <h2 class="filterproduct-title"><span class="content"><strong>New Products</strong></span></h2>
+                    <div class="row owl-carousel">
+                        <?php foreach ($products as $item) { ?>
+                            <div class="product position-relative">
+                                <img src="/pub/media/catalog/product/<?= $item->getImage() ?>" alt="">
+                                <a href="<?= $item->getProductUrl() ?>">
+                                    <h5 class="name">
+                                        <?= $item->getName() ?>
+                                    </h5>
+                                </a>
+                                <ul class="rating d-flex">
+                                    <li class="bi-star">
+
+                                    </li>
+                                    <li class="bi-star">
+
+                                    </li>
+                                    <li class="bi-star">
+
+                                    </li>
+                                    <li class="bi-star">
+
+                                    </li>
+                                    <li class="bi-star">
+
+                                    </li>
+                                </ul>
+                               
+                                <span class="des">this is decscription</span> <br>
+                                <h3 class="price"><?= $item->getPrice() ?></h3>
+                                <div class="add-cart d-flex justify-content-between">
+                                <?= $block->getBlockHtml('formkey') ?>
+                                <input type="hidden" name="url-add-to-cart" value="<?= $block->getUrl('checkout/cart/add') ?>">
+                                <input type="hidden" name="id-product" value="<?= $item->getId() ?>">
+                                    <button data-id="<?= $item->getId() ?>" class="add-to-cart">Add To Bag</button>
+                                    <i class="bi-heart"></i>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<?php endif; ?>
+
+<script>
+    require([
+        "jquery",
+    ], function($) {
+        "use strict";
+        $('button.add-to-cart').click(function(e) {
+            e.preventDefault()
+            const id = $(this).data('id')
+            const url = $('input[name="url-add-to-cart"][type="hidden"]').val().trim()+ `product/${id}`
+            const antiCsrf = $('input[name="form_key"][type="hidden"]').val().trim()
+            $.post(url,{
+                "form_key" : antiCsrf
+            },rsp=>{
+                alert('Add product success')
+            })
+        })
+    });
+</script>
