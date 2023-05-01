@@ -21,7 +21,7 @@ $customerMobile = $customer->getCustomAttribute('customer_mobile') ? $customer->
                 <p>
                     Name: <?= $block->escapeHtml($block->getName()) ?><br>
                     Email: <?= $block->escapeHtml($block->getCustomer()->getEmail()) ?><br>
-                    Phone: <?= $customerMobile?>
+                    Phone: <?= $customerMobile ?>
                 </p>
                 <?= $block->getChildHtml('customer.account.dashboard.info.extra'); ?>
             </div>

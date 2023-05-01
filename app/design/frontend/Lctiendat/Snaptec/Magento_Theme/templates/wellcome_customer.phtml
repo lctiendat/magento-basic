@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var \Magento\Theme\Block\Html\Header $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+$welcomeMessage = $block->getWelcome();
+?>
+<li class="greet welcome mr-2" data-bind="scope: 'customer'">
+    <!-- ko if: customer().fullname  -->
+    <span class="logged-in" data-bind="text: new String('<?= $escaper->escapeHtml(__('Hi %1', '%1')) ?>').replace('%1', customer().fullname)">
+    </span>
+    <!-- /ko -->
+</li>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "customer": {
+                        "component": "Magento_Customer/js/view/customer"
+                    }
+                }
+            }
+        }
+    }
+    </script>

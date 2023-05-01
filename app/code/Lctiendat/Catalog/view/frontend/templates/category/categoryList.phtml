@@ -1,25 +1,28 @@
-
-
-<?php if($categories = $block->getCategoryList()): ?>
-<div class="shopbycate">
-    <div class="container">
-        <div class="row">
-            <div class="col-10 mx-auto">
-                <h2 class="filter-product-title"><span class="content"><strong>Shop By Category </strong></span></h2>
-                <div class="row mt-5 text-center owl-carousel">
-                    <?php foreach($categories as $item) { ?>
-                    <div class="nopadding pr-0 pl-0">
-                        <a href="<?= $item->getUrl(); ?>">
-                            <img src="<?= $block->escapeUrl('/pub' . $item->getImageUrl()); ?>"
-                                alt="<?= $item->getName(); ?>" />
-                            <h3 class="category-name"> <?= $item->getName(); ?> </h3>
+<?php if ($categories = $block->getCategoryList()) : ?>
+    <div class="shopbycate">
+        <div class="container">
+            <div class="row">
+                <div class="col-10 mx-auto">
+                    <h2 class="filter-product-title"><span class="content"><strong>Shop By Category </strong></span></h2>
+                    <div class="row mt-5 text-center owl-carousel">
+                        <?php foreach ($categories as $item) { ?>
+                            <div class="nopadding pr-0 pl-0">
+                                <a href="<?= $item->getUrl(); ?>">
+                                    <img src="<?= $block->escapeUrl('/pub' . $item->getImageUrl()); ?>" alt="<?= $item->getName(); ?>" />
+                                    <h3 class="category-name"> <?= $item->getName(); ?> </h3>
+                            </div>
+                        <?php } ?>
                     </div>
-                    <?php } ?>
+                    <div class="line"></div>
                 </div>
-                <div class="line"></div>
             </div>
         </div>
     </div>
-</div>
 <?php endif; ?>
 
+<style>
+    .shopbycate  img {
+       padding-left: 10px !important;
+       height: 200px !important;
+    }
+</style>

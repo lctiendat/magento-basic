@@ -106,13 +106,13 @@ class InstallData implements InstallDataInterface
         $customAttribute->addData([
             'attribute_set_id' => $attributeSetId,
             'attribute_group_id' => $attributeGroupId,
-            'used_in_forms' => ['adminhtml_customer', 'customer_account_edit']
+            'used_in_forms' => ['adminhtml_customer_edit']
         ]);
 
         $companyAtt->addData([
             'attribute_set_id' => $attributeSetId,
             'attribute_group_id' => $attributeGroupId,
-            'used_in_forms' => ['adminhtml_customer', 'customer_account_edit','customer_account_create']
+            'used_in_forms' => ['adminhtml_customer', 'customer_account_edit']
         ]);
 
         $customAttribute->save();

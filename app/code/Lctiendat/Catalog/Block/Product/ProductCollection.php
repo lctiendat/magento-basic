@@ -23,7 +23,7 @@ class ProductCollection extends Template
         $collection->addAttributeToSelect('*');
         // $collection->addAttributeToFilter('news_from_date', ['date' => true, 'to' => date('Y-m-d H:i:s')]);
         // $collection->addAttributeToSort('news_from_date', 'DESC');
-        $collection->setPageSize(10);
+        $collection->setPageSize(20);
 
         return $collection;
     }
@@ -32,7 +32,7 @@ class ProductCollection extends Template
     {
         $collection = $this->productCollectionFactory->create();
         $collection->addStoreFilter();
-        $collection->setPageSize(10); // Set the number of products to show
+        $collection->setPageSize(20); // Set the number of products to show
 
         return $collection;
     }

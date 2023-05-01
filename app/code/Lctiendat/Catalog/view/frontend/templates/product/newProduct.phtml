@@ -34,7 +34,7 @@
                                 </ul>
                                
                                 <span class="des">this is decscription</span> <br>
-                                <h3 class="price"><?= $item->getPrice() ?></h3>
+                                <h3 class="price">$<?= str_replace ('.000000','',$item->getPrice()) ?></h3>
                                 <div class="add-cart d-flex justify-content-between">
                                 <?= $block->getBlockHtml('formkey') ?>
                                 <input type="hidden" name="url-add-to-cart" value="<?= $block->getUrl('checkout/cart/add') ?>">

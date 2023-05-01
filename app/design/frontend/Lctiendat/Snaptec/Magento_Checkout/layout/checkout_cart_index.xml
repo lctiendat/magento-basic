@@ -205,8 +205,7 @@
                     </block>
                 </container>
             </block>
-            <block class="Magento\Checkout\Block\Cart\Crosssell" name="crosssell.cart" template="Magento_Checkout::cart/crosssell.phtml"/>
-            </referenceContainer>
-            <block class="Magento\Checkout\Block\Cart\Additional\Info" name="additional.product.info" template="Magento_Checkout::cart/additional/info.phtml"/>
-        </body>
-    </page>
+        </referenceContainer>
+        <block class="Magento\Checkout\Block\Cart\Additional\Info" name="additional.product.info" template="Magento_Checkout::cart/additional/info.phtml"/>
+    </body>
+</page>

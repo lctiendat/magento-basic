@@ -5,7 +5,8 @@
  * See COPYING.txt for license details.
  */
 -->
-<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<page layout="1column"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
         <css src="mage/gallery/gallery.css"/>
     </head>
@@ -36,7 +37,7 @@
         </referenceBlock>
 
         <referenceContainer name="content">
-                <!-- <block class="Magento\Catalog\Block\Product\View" before="-" template="Magento_Catalog::product_detail_customer.phtml" /> -->
+            <block class="Magento\Catalog\Block\Product\View" before="-" template="Magento_Catalog::product/productDetailCustom.phtml" />
             <container name="product.info.main" htmlTag="div" htmlClass="product-info-main" before="-">
                 <container name="product.info.price" label="Product info auxiliary container" htmlTag="div" htmlClass="product-info-price">
                     <container name="product.info.stock.sku" label="Product auxiliary info" htmlTag="div" htmlClass="product-info-stock-sku">
@@ -91,8 +92,7 @@
                 <container name="product.info.extrahint" as="extrahint" label="Product View Extra Hint">
                     <container name="product.info.social" label="Product social links container" htmlTag="div" htmlClass="product-social-links">
                         <block class="Magento\Catalog\Block\Product\View" name="product.info.addto" as="addto" template="Magento_Catalog::product/view/addto.phtml">
-                            <block class="Magento\Catalog\Block\Product\View\AddTo\Compare" name="view.addto.compare" after="view.addto.wishlist"
-                                   template="Magento_Catalog::product/view/addto/compare.phtml" >
+                            <block class="Magento\Catalog\Block\Product\View\AddTo\Compare" name="view.addto.compare" after="view.addto.wishlist" template="Magento_Catalog::product/view/addto/compare.phtml">
                                 <arguments>
                                     <argument name="addToCompareViewModel" xsi:type="object">Magento\Catalog\ViewModel\Product\Checker\AddToCompareAvailability</argument>
                                 </arguments>
@@ -179,9 +179,7 @@
                     <argument name="view_model" xsi:type="object">Magento\Catalog\ViewModel\Product\Listing\PreparePostData</argument>
                 </arguments>
                 <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="related.product.addto" as="addto">
-                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
-                           name="related.product.addto.compare" as="compare"
-                           template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare" name="related.product.addto.compare" as="compare" template="Magento_Catalog::product/list/addto/compare.phtml"/>
                 </block>
             </block>
             <block class="Magento\Catalog\Block\Product\ProductList\Upsell" name="product.info.upsell" template="Magento_Catalog::product/list/items.phtml">
@@ -190,9 +188,7 @@
                     <argument name="view_model" xsi:type="object">Magento\Catalog\ViewModel\Product\Listing\PreparePostData</argument>
                 </arguments>
                 <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="upsell.product.addto" as="addto">
-                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
-                           name="upsell.product.addto.compare" as="compare"
-                           template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare" name="upsell.product.addto.compare" as="compare" template="Magento_Catalog::product/list/addto/compare.phtml"/>
                 </block>
             </block>
             <block class="Magento\Catalog\Block\Product\View\Additional" name="product.info.additional" as="product_additional_data"/>
@@ -204,10 +200,7 @@
             <block class="Magento\Catalog\Block\ShortcutButtons\InCatalog" name="addtocart.shortcut.buttons.additional"/>
         </referenceBlock>
         <referenceContainer name="content">
-            <block
-                    class="Magento\Catalog\Block\Ui\ProductViewCounter"
-                    name="product_viewed_counter"
-                    template="Magento_Catalog::product/view/counter.phtml"/>
+            <block class="Magento\Catalog\Block\Ui\ProductViewCounter" name="product_viewed_counter" template="Magento_Catalog::product/view/counter.phtml"/>
         </referenceContainer>
     </body>
 </page>

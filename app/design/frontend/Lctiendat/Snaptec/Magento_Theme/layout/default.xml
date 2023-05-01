@@ -11,21 +11,51 @@
     <body>
         <referenceContainer name="header.container">
             <container htmlTag="div" name="page-header" htmlClass="container">
-                <container htmlTag="div" name="header-top" htmlClass="d-flex justify-content-between">
-                    <container htmlTag="div" name="header-nav-left" />
+                <container htmlTag="div" name="header-top" htmlClass="d-flex justify-content-between mt-1">
+                    <container htmlTag="div" name="header-nav-left">
+                        <block class="Magento\Framework\View\Element\Template" template="Magento_Theme::header_nav_left.phtml" name="header_nav_left"/>
+                    </container>
                     <container htmlTag="div" name="header-nav-main" />
-                    <container htmlTag="div" name="header-nav-right" htmlClass="d-flex" />
+                    <container htmlTag="div" name="header-nav-right" htmlClass="d-flex">
+                        <block class="Magento\Framework\View\Element\Template" template="Magento_Theme::search_icon.phtml" before="-" />
+                        <block class="Magento\Theme\Block\Html\Header" template="Magento_Theme::wellcome_customer.phtml" before="-" />
+                    </container>
                 </container>
-                <container htmlTag="div" name="header-nav"/>
+            </container>
+            <container htmlTag="div" name="header-nav" htmlClass="header-nav"/>
+            <container name="custom-search" htmlTag="div" />
+            <container name="wellcome-text" htmlTag="div" htmlClass="wellcomeText">
+                <block class="Magento\Theme\Block\Html\Header" name="wellcometext" template="Magento_Theme::wellcome_text.phtml" />
             </container>
         </referenceContainer>
+        <referenceContainer name="footer-container">
+            <container htmlTag="div">
+                <block class="Magento\Framework\View\Element\Template" template="Magento_Theme::footer_link.phtml" name="footer_link"/>
+            </container>
+            <container htmlTag="div" htmlClass="container d-flex justify-content-between mt-5">
+                <container htmlTag="div" name="form-sub"/>
+                <container htmlTag="div" name="footer-title">
+                    <block class="Magento\Framework\View\Element\Template" template="Magento_Theme::footer_title.phtml" />
+                </container>
+                <container htmlTag="div">
+                    <block class="Magento\Framework\View\Element\Template" template="Magento_Theme::footer_icon.phtml" name="footer_icon"/>
+                </container>
+            </container>
+            <container htmlTag="div" name="footer-copyright"/>
+        </referenceContainer>
         <move element="logo" destination="header-nav-main" />
-        <move element="top.search" destination="header-nav-right" />
+        <!-- <move element="top.search" destination="custom-search" /> -->
         <move element="authorization-link" destination="header-nav-right" />
         <move element="wish-list-link" destination="header-nav-right" before="minicart" />
         <move element="minicart" destination="header-nav-right" />
-        <!-- <referenceBlock name="top.links" remove="true"/> -->
-              <!-- <referenceBlock name="header.container" remove="true" />   -->
+        <move element="copyright" destination="footer-copyright" />
+        <move element="form.subscribe" destination="form-sub" />
+        <move element="navigation.sections" destination="header-nav" />
+        <referenceBlock name="report.bugs" remove="true" />
+        <referenceBlock name="footer_links" remove="true" />
+        <referenceBlock name="advanced-search-link" remove="true"/>
+        <referenceBlock name="top.search" remove="true"/>
+        <referenceBlock name="top.links" remove="true"/>
 
     </body>
 </page>

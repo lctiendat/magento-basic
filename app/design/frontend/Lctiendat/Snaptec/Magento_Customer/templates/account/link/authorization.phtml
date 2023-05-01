@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var \Magento\Customer\Block\Account\AuthorizationLink $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+$dataPostParam = '';
+if ($block->isLoggedIn()) {
+    $dataPostParam = sprintf(" data-post='%s'", $block->getPostParams());
+}
+
+$customerData = $block->getInforCustomer();
+// $name = $customerData ? $customerData['name'] : 'Not found name';
+// $email = $customerData ? $customerData['email'] : 'Not found email';
+?>
+<li class="link authorization-link position-relative" data-label="<?= $escaper->escapeHtml(__('or')) ?>">
+    <?php if (!$block->isLoggedIn()) { ?>
+        <a <?= /* @noEscape */ $block->getLinkAttributes() ?> <?= /* @noEscape */ $dataPostParam ?>><img id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" src="<?= $this->getViewFileUrl('images/user-icon.png'); ?>" alt="test" />
+        </a>
+    <?php } else { ?>
+        <img id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" src="<?= $this->getViewFileUrl('images/user-icon.png'); ?>" alt="test" />
+        <div class="show-menu-logged d-none">
+            <p>You are now logged in as:</p>
+            <p><?= $customerData['name'] ?></p>
+            <p><?= $customerData['email'] ?></p>
+            <div class="d-flex justify-content-lg-between">
+                <a href="<?= $block->getUrlMyAccount() ?>"><button class="btn btn-primary btn-first">My Account</button></a>
+                <a href="<?= $block->getLogoutUrl() ?>"><button class="btn btn-primary btn-second">Sign out</button> </a>
+            </div>
+        </div>
+    <?php } ?>
+</li>

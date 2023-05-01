@@ -5,7 +5,11 @@
     <css src="css/bootstrap.min.css" />
     <css src="css/owl.carousel.min.css" />
     <css src="css/owl.theme.default.min.css" />
+    <css src="css/slick-theme.css" />
+    <css src="css/slick.css" />
+    <css src="css/bootstrap-icons.css"/>
     <script src="js/_carousel.js" />
+    <script src="js/local.js" />
   </head>
 </page>
 

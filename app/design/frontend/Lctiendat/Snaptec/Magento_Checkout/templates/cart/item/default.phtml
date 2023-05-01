@@ -17,7 +17,6 @@ $isVisibleProduct = $product->isVisibleInSiteVisibility();
 /** @var \Magento\Msrp\Helper\Data $helper */
 $helper = $this->helper(Magento\Msrp\Helper\Data::class);
 $canApplyMsrp = $helper->isShowBeforeOrderConfirm($product) && $helper->isMinimalPriceLessMsrp($product);
-
 ?>
 <tbody class="cart item">
     <tr class="item-info">
@@ -71,7 +70,7 @@ $canApplyMsrp = $helper->isShowBeforeOrderConfirm($product) && $helper->isMinima
         </td>
 
         <td>
-            hfsdhfk
+            <?= $product->getAttributeText("brand") ? $product->getAttributeText("brand")  : 'Not found brand' ?>
         </td>
 
         <?php if ($canApplyMsrp) : ?>
@@ -99,7 +98,9 @@ $canApplyMsrp = $helper->isShowBeforeOrderConfirm($product) && $helper->isMinima
                 <div class="control qty">
                     <label for="cart-<?= $block->escapeHtmlAttr($_item->getId()) ?>-qty">
                         <span class="label"><?= $block->escapeHtml(__('Qty')) ?></span>
-                        <input data-id="<?= $block->escapeHtmlAttr($_item->getId()) ?>" id="cart-<?= $block->escapeHtmlAttr($_item->getId()) ?>-qty" name="cart[<?= $block->escapeHtmlAttr($_item->getId()) ?>][qty]" data-cart-item-id="<?= $block->escapeHtmlAttr($_item->getSku()) ?>" value="<?= $block->escapeHtmlAttr($block->getQty()) ?>" type="number" size="4" step="any" title="<?= $block->escapeHtmlAttr(__('Qty')) ?>" class="input-text qty" data-validate="{required:true,'validate-greater-than-zero':true}" data-role="cart-item-qty" />
+                        <button class="btn-update" data-type="des" data-id="<?= $block->escapeHtmlAttr($_item->getId()) ?>">-</button>
+                        <input data-id="<?= $block->escapeHtmlAttr($_item->getId()) ?>" id="cart-<?= $block->escapeHtmlAttr($_item->getId()) ?>-qty" name="cart[<?= $block->escapeHtmlAttr($_item->getId()) ?>][qty]" data-cart-item-id="<?= $block->escapeHtmlAttr($_item->getSku()) ?>" value="<?= $block->escapeHtmlAttr($block->getQty()) ?>" type="number" size="4" step="any" title="<?= $block->escapeHtmlAttr(__('Qty')) ?>" class="input-text qty" data-validate="{required:true,'validate-greater-than-zero':true}" data-role="cart-item-qty" min="1" minlength="1" />
+                        <button class="btn-update" data-type="inc" data-id="<?= $block->escapeHtmlAttr($_item->getId()) ?>">+</button>
                     </label>
                 </div>
             </div>
@@ -121,72 +122,3 @@ $canApplyMsrp = $helper->isShowBeforeOrderConfirm($product) && $helper->isMinima
         </td>
     </tr>
 </tbody>
-
-<style>
-    input[type="number"] {
-        -webkit-appearance: textfield;
-        -moz-appearance: textfield;
-        appearance: textfield;
-    }
-
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-    }
-
-    .cart.item button.button_qty {
-        outline: none;
-        -webkit-appearance: none;
-        background-color: transparent;
-        border: none;
-        align-items: center;
-        justify-content: center;
-        width: 3rem;
-        height: 3rem;
-        cursor: pointer;
-        margin: 0;
-        position: relative;
-    }
-
-    .cart.item button.button_qty:before,
-    .cart.item button.button_qty:after {
-        display: inline-block;
-        position: absolute;
-        content: '';
-        width: 1rem;
-        height: 2px;
-        background-color: #212121;
-        transform: translate(-50%, -50%);
-    }
-
-    .cart.item button.button_qty.plus:after {
-        transform: translate(-50%, -50%) rotate(90deg);
-    }
-
-    .cart.item input[type=number] {
-        font-family: sans-serif;
-        max-width: 5rem;
-        padding: .5rem;
-        border: solid #ddd;
-        border-width: 0 2px;
-        font-size: 2rem;
-        height: 3rem;
-        font-weight: bold;
-        text-align: center;
-    }
-</style>
-
-<script>
-    require(['jquery'], ($) => {
-        const form_key = $('input[name="form_key"]').val();
-        const url = "<?= $block->escapeUrl($block->getUrl('checkout/cart/UpdateItemQty')) ?>"
-        $(document).change('input[type="number"].input-text.qty', function(e) {
-            const item_id = $(this).data('id');
-            const qty = $(this).val().trim()
-            $.post(url, {
-                item_id,
-                qty
-            })
-        })
-    })
-</script>

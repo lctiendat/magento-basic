@@ -23,10 +23,10 @@ class CustomerLogin implements ObserverInterface
 
     public function execute(Observer $observer)
     {
-        $customer = $observer->getEvent()->getCustomer();
-        $customerData = $customer->getDataModel();
-        $customerData->setData('middlename', 'Mid');
-        $customer->updateData($customerData);
-        $customer->save();
+        // $customer = $observer->getEvent()->getCustomer();
+        // $customerData = $customer->getDataModel();
+        // $customerData->setData('middlename', 'Mid');
+        // $customer->updateData($customerData);
+        // $customer->save();
     }
 }
