@@ -6,8 +6,8 @@ define(["Magento_Checkout/js/view/payment/default"], function (Component) {
             template: "Lctiendat_MomoPayment/payment/custompayment",
         },
         /** Returns send check to info */
-        getMailingAddress: function () {
-            return window.checkoutConfig.payment.customtemplate.mailingAddress;
-        },
+        // getMailingAddress: function () {
+        //     return window.checkoutConfig.payment.customtemplate.mailingAddress;
+        // },
     });
 });

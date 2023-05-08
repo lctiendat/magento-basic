@@ -21,8 +21,6 @@ class ProductCollection extends Template
     {
         $collection = $this->productCollectionFactory->create();
         $collection->addAttributeToSelect('*');
-        // $collection->addAttributeToFilter('news_from_date', ['date' => true, 'to' => date('Y-m-d H:i:s')]);
-        // $collection->addAttributeToSort('news_from_date', 'DESC');
         $collection->setPageSize(20);
 
         return $collection;

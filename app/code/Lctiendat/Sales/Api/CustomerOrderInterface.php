@@ -4,5 +4,10 @@ namespace Lctiendat\Sales\Api;
 
 interface CustomerOrderInterface
 {
-    function getCustomerOrder();
+    /**
+     * @param string $fromDate
+     * @param string $toDate
+     * @return void
+     */
+    public function getCustomerOrder($fromDate, $toDate);
 }

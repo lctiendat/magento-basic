@@ -7,9 +7,8 @@ class OrderStatus implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray()
     {
         return [
-            ['value' => 1, 'label' => 'label1'],
-            ['value' => 2, 'label' => 'label2']
-
+            ['value' => 'Yes', 'label' => 'Yes'],
+            ['value' => 'No', 'label' => 'No']
         ];
     }
 }

@@ -31,9 +31,7 @@ class UpgradeData implements UpgradeDataInterface
     ) {
 
         if (version_compare($context->getVersion(), "1.0.1", "<")) {
-
             $salesSetup = $this->salesSetupFactory->create(['setup' => $setup]);
-
             $salesSetup->addAttribute(
                 \Magento\Sales\Model\Order::ENTITY,
                 'order_status',

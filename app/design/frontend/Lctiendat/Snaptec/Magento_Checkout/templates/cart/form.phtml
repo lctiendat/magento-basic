@@ -143,11 +143,9 @@
                     rateRegistry.set(address.getKey(), null);
                     rateRegistry.set(address.getCacheKey(), null);
                     quote.shippingAddress(address);
-
-
                 },
-                error: function() {
-                    console.log('error');
+                error: function(e) {
+                    console.log('error',e);
                 }
             })
         })

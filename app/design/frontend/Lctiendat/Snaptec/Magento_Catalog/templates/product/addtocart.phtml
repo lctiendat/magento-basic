@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
@@ -8,93 +9,84 @@
 ?>
 <?php $_product = $block->getProduct(); ?>
 <?php $buttonTitle = __('Add to Cart'); ?>
-<?php if ($_product->isSaleable()) :?>
-<div class="box-tocart">
+<?php if ($_product->isSaleable()) : ?>
+  <div class="box-tocart">
     <div class="fieldset">
-        <?php if ($block->shouldRenderQuantity()) :?>
+      <?php if ($block->shouldRenderQuantity()) : ?>
         <div class="field qty">
-            <label class="label" for="qty"><span><?= $block->escapeHtml(__('Qty')) ?></span></label>
-            <div class="control">
-            <button class="button_qty" onclick="event.preventDefault();this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
-                <input type="number"
-                       name="qty"
-                       id="qty"
-                       min="1"
-                       value="<?= $block->getProductDefaultQty() * 1 ?>"
-                       title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
-                       class="input-text qty"
-                       data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
-                       />
-                       <button onclick="event.preventDefault(); this.parentNode.querySelector('input[type=number]').stepUp()" class="plus button_qty" ></button>
-            </div>
+          <label class="label" for="qty"><span><?= $block->escapeHtml(__('Qty')) ?></span></label>
+          <div class="control">
+            <button class="button_qty" onclick="event.preventDefault();this.parentNode.querySelector('input[type=number]').stepDown()"></button>
+            <input type="number" name="qty" id="qty" min="1" value="<?= $block->getProductDefaultQty() * 1 ?>" title="<?= $block->escapeHtmlAttr(__('Qty')) ?>" class="input-text qty" data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>" />
+            <button onclick="event.preventDefault(); this.parentNode.querySelector('input[type=number]').stepUp()" class="plus button_qty"></button>
+          </div>
         </div>
-        <?php endif; ?>
-        <div class="actions">
-            <button type="submit"
-                    title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
-                    class="action primary tocart"
-                    id="product-addtocart-button" disabled>
-                <span><?= $block->escapeHtml($buttonTitle) ?></span>
-            </button>
-            <?= $block->getChildHtml('', true) ?>
-        </div>
+      <?php endif; ?>
+      <div class="actions">
+        <button type="submit" title="<?= $block->escapeHtmlAttr($buttonTitle) ?>" class="action primary tocart" id="product-addtocart-button" disabled>
+          <span><?= $block->escapeHtml($buttonTitle) ?></span>
+        </button>
+        <?= $block->getChildHtml('', true) ?>
+      </div>
     </div>
-</div>
+  </div>
 <?php endif; ?>
 
 <style>
-    input[type="number"] {
-  -webkit-appearance: textfield;
-     -moz-appearance: textfield;
-          appearance: textfield;
-}
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none;
-}
+  input[type="number"] {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
 
-.box-tocart button.button_qty {
-  outline:none;
-  -webkit-appearance: none;
-  background-color: transparent;
-  border: none;
-  align-items: center;
-  justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  cursor: pointer;
-  margin: 0;
-  position: relative;
-}
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }
 
-.box-tocart button.button_qty:before,
-.box-tocart button.button_qty:after {
-  display: inline-block;
-  position: absolute;
-  content: '';
-  width: 1rem;
-  height: 2px;
-  background-color: #212121;
-  transform: translate(-50%, -50%);
-}
-.box-tocart button.button_qty.plus:after {
-  transform: translate(-50%, -50%) rotate(90deg);
-}
+  .box-tocart button.button_qty {
+    outline: none;
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    margin: 0;
+    position: relative;
+  }
 
-.box-tocart input[type=number] {
-  font-family: sans-serif;
-  max-width: 5rem;
-  padding: .5rem;
-  border: solid #ddd;
-  border-width: 0 2px;
-  font-size: 2rem;
-  height: 3rem;
-  font-weight: bold;
-  text-align: center;
-}
+  .box-tocart button.button_qty:before,
+  .box-tocart button.button_qty:after {
+    display: inline-block;
+    position: absolute;
+    content: '';
+    width: 1rem;
+    height: 2px;
+    background-color: #212121;
+    transform: translate(-50%, -50%);
+  }
+
+  .box-tocart button.button_qty.plus:after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .box-tocart input[type=number] {
+    font-family: sans-serif;
+    max-width: 5rem;
+    padding: .5rem;
+    border: solid #ddd;
+    border-width: 0 2px;
+    font-size: 2rem;
+    height: 3rem;
+    font-weight: bold;
+    text-align: center;
+  }
 </style>
 <script type="text/x-magento-init">
-    {
+  {
         "#product_addtocart_form": {
             "Magento_Catalog/js/validate-product": {}
         }

@@ -2,7 +2,13 @@
 
 use Magento\Framework\App\Bootstrap;
 
-require 'app/bootstrap.php';
+try {
+    require 'app/bootstrap.php';
+} catch (\Exception $e) {
+    echo 'Autoload error: ' . $e->getMessage();
+    exit(1);
+}
+
 $bootstrap = Bootstrap::create(BP, $_SERVER);
 $objectManager = $bootstrap->getObjectManager();
 $state = $objectManager->get('Magento\Framework\App\State');
@@ -41,95 +47,82 @@ $tempData = [
         'save_in_address_book' => 10
     ],
     'items' => [
-        //array of product which order you want to create
         ['product_id' => '23', 'qty' => 1],
-        ['product_id' => '24', 'qty' => 1]
+        // ['product_id' => '24', 'qty' => 1]
     ]
 ];
 
-$store = $storeManager->getStore();
-$websiteId = $storeManager->getStore()->getWebsiteId();
-$customer = $customerFactory->create();
-$customer->setWebsiteId($websiteId);
-$customer->loadByEmail($tempData['email']); // load customet by email address
-if (!$customer->getEntityId()) {
-    //If not avilable then create this customer
-    $customer->setWebsiteId($websiteId)
-        ->setStore($store)
-        ->setFirstname($tempData['shipping_address']['firstname'])
-        ->setLastname($tempData['shipping_address']['lastname'])
-        ->setEmail($tempData['email'])
-        ->setPassword($tempData['email']);
-    $customer->save();
+try {
+    $store = $storeManager->getStore();
+    $websiteId = $storeManager->getStore()->getWebsiteId();
+    $customer = $customerFactory->create();
+    $customer->setWebsiteId($websiteId);
+    $customer->loadByEmail($tempData['email']); // load customet by email address
+    if (!$customer->getEntityId()) {
+        //If not avilable then create this customer
+        $customer->setWebsiteId($websiteId)
+            ->setStore($store)
+            ->setFirstname($tempData['shipping_address']['firstname'])
+            ->setLastname($tempData['shipping_address']['lastname'])
+            ->setEmail($tempData['email'])
+            ->setPassword($tempData['email']);
+        $customer->save();
+    }
+    $cart_id = $cartManagementInterface->createEmptyCart();
+    $cart = $cartRepositoryInterface->get($cart_id);
+
+    $cart->setStore($store);
+
+    $customer = $customerRepository->getById($customer->getEntityId());
+    $cart->setCurrency();
+    $cart->assignCustomer($customer);
+
+    foreach ($tempData['items'] as $item) {
+        $product = $productFactory->create()->load($item['product_id']);
+        $cart->addProduct(
+            $product,
+            intval($item['qty'])
+        );
+    }
+
+
+    $cart->getBillingAddress()->addData($tempData['shipping_address']);
+    $cart->getShippingAddress()->addData($tempData['shipping_address']);
+
+    $shippingAddress = $cart->getShippingAddress();
+
+
+    $shippingQuoteRate = $objectManager->get('\Magento\Quote\Model\Quote\Address\Rate');
+    $shippingRateCarrier = 'freeshipping';
+    $shippingRateCarrierTitle = 'Freeshipping';
+    $shippingRateCode = 'freeshipping_freeshipping';
+    $shippingRateMethod = 'freeshipping';
+    $shippingRatePrice = '0';
+    $shippingRateMethodTitle = 'Free shipping';
+    $shippingAddress = $cart->getShippingAddress();
+    $shippingQuoteRate->setCarrier($shippingRateCarrier);
+    $shippingQuoteRate->setCarrierTitle($shippingRateCarrierTitle);
+    $shippingQuoteRate->setCode($shippingRateCode);
+    $shippingQuoteRate->setMethod($shippingRateMethod);
+    $shippingQuoteRate->setPrice($shippingRatePrice);
+    $shippingQuoteRate->setMethodTitle($shippingRateMethodTitle);
+    $shippingAddress->setCollectShippingRates(false)
+        ->collectShippingRates()
+        ->setShippingMethod($shippingRateCode);
+
+    $cart->getShippingAddress()->addShippingRate($shippingQuoteRate);
+    $cart->setPaymentMethod('checkmo');
+
+    $cart->setInventoryProcessed(false);
+
+    $cart->getPayment()->importData(['method' => 'checkmo']);
+    $cart->collectTotals();
+
+    $cart->save();
+    $cart = $cartRepositoryInterface->get($cart->getId());
+    $order_id = $cartManagementInterface->placeOrder($cart->getId());
+
+    print_r('Order created');
+} catch (\Exception $th) {
+    print_r($th->getMessage());
 }
-$cart_id = $cartManagementInterface->createEmptyCart();
-$cart = $cartRepositoryInterface->get($cart_id);
-
-$cart->setStore($store);
-
-// if you have already had the buyer id, you can load customer directly
-$customer = $customerRepository->getById($customer->getEntityId());
-$cart->setCurrency();
-$cart->assignCustomer($customer); //Assign quote to customer
-
-//add items in quote
-foreach ($tempData['items'] as $item) {
-    $product = $productFactory->create()->load($item['product_id']);
-    $cart->addProduct(
-        $product,
-        intval($item['qty'])
-    );
-}
-
-//Set Address to quote
-//$quote->getBillingAddress()->addData($tempData['shipping_address']);
-$cart->getBillingAddress()->addData($tempData['shipping_address']);
-//$quote->getShippingAddress()->addData($tempData['shipping_address']);
-$cart->getShippingAddress()->addData($tempData['shipping_address']);
-
-/*$this->shippingRate
-    ->setCode('freeshipping_freeshipping')
-    ->getPrice(1);
-*/
-$shippingAddress = $cart->getShippingAddress();
-
-
-$shippingQuoteRate = $objectManager->get('\Magento\Quote\Model\Quote\Address\Rate');
-$shippingRateCarrier = 'freeshipping';
-$shippingRateCarrierTitle = 'Freeshipping';
-$shippingRateCode = 'freeshipping_freeshipping';
-$shippingRateMethod = 'freeshipping';
-$shippingRatePrice = '0';
-$shippingRateMethodTitle = 'Free shipping';
-$shippingAddress = $cart->getShippingAddress();
-$shippingQuoteRate->setCarrier($shippingRateCarrier);
-$shippingQuoteRate->setCarrierTitle($shippingRateCarrierTitle);
-$shippingQuoteRate->setCode($shippingRateCode);
-$shippingQuoteRate->setMethod($shippingRateMethod);
-$shippingQuoteRate->setPrice($shippingRatePrice);
-$shippingQuoteRate->setMethodTitle($shippingRateMethodTitle);
-$shippingAddress->setCollectShippingRates(false)
-    ->collectShippingRates()
-    ->setShippingMethod($shippingRateCode);
-
-// $shippingAddress->setCollectShippingRates(true)
-//     ->collectShippingRates()
-//     ->setShippingMethod('freeshipping_freeshipping'); //shipping method
-
-$cart->getShippingAddress()->addShippingRate($shippingQuoteRate);
-$cart->setPaymentMethod('checkmo'); //payment method
-
-$cart->setInventoryProcessed(false);
-
-// Set sales order payment
-$cart->getPayment()->importData(['method' => 'checkmo']);
-
-// Collect total and save
-$cart->collectTotals();
-
-// Submit the quote and create the order
-$cart->save();
-$cart = $cartRepositoryInterface->get($cart->getId());
-$order_id = $cartManagementInterface->placeOrder($cart->getId());
-
-echo "Order Created";

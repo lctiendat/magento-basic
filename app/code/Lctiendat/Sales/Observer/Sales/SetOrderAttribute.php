@@ -2,20 +2,23 @@
 
 namespace Lctiendat\Sales\Observer\Sales;
 
+use Magento\Framework\Message\ManagerInterface;
+use Magento\Framework\Event\Observer;
+use Magento\Framework\Event\ObserverInterface;
 
-class SetOrderAttribute implements \Magento\Framework\Event\ObserverInterface
+class SetOrderAttribute implements ObserverInterface
 
 {
     protected $messageManager;
     public function __construct(
-        \Magento\Framework\Message\ManagerInterface $messageManager
+        ManagerInterface $messageManager
     ) {
         $this->messageManager = $messageManager;
     }
 
 
     public function execute(
-        \Magento\Framework\Event\Observer $observer
+        Observer $observer
     ) {
         try {
             $order = $observer->getOrder();

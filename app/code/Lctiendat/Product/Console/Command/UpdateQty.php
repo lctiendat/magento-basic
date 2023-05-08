@@ -9,6 +9,7 @@ use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\App\State;
 use Magento\Framework\App\Area;
+use Magento\Catalog\Ui\DataProvider\Product\ProductCollection;
 
 class UpdateQty extends Command
 {
@@ -42,6 +43,7 @@ class UpdateQty extends Command
     function execute(InputInterface $input, OutputInterface $output)
     {
         $this->state->setAreaCode(Area::AREA_ADMINHTML);
+
         try {
             $productCollection = $this->productRepository->getList($this->searchCriteriaBuilder->create());
             foreach ($productCollection->getItems() as $product) {

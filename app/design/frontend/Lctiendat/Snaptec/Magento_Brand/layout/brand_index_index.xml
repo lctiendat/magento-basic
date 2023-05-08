@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-<body>
-
-        <referenceBlock name="catalog.compare.sidebar" remove="true"/> 
+    <body>
+        <referenceBlock name="catalog.compare.sidebar" remove="true"/>
         <referenceBlock name="wishlist_sidebar" remove="true" />
-    <referenceContainer name="content">
-        <block class="Lctiendat\Brand\Block\Brand\Widget" template="Lctiendat_Brand::view.phtml" ifconfig="brand/general/enable" />
-    </referenceContainer>
-</body>
+        <referenceContainer name="content">
+            <block class="Lctiendat\Brand\Block\Brand\Widget" template="Lctiendat_Brand::view.phtml" ifconfig="brand/general/enable" />
+        </referenceContainer>
+    </body>
 </page>
