@@ -25,7 +25,7 @@ class CategoryCollection extends Template
         ->addAttributeToSort('position', 'ASC')
         ->addAttributeToFilter('is_active', 1)
         ->addAttributeToFilter('include_in_menu', 1)
-        ->setPageSize(5);;
+        ->setPageSize(5);
 
         return $collection;
     }

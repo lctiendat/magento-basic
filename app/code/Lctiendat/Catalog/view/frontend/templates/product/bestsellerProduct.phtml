@@ -6,6 +6,7 @@
                     <h2 class="filterproduct-title"><span class="content"><strong>Best Sellers</strong></span></h2>
                     <div class="row owl-carousel">
                         <?php foreach ($products as $item) { ?>
+                            <form data-id="<?= $item->getId() ?>">
                             <div class="product position-relative">
                                 <img src="/pub/media/catalog/product/<?= $item->getImage() ?>" style="max-width: 400px;" alt="">
                                 <a href="<?= $item->getProductUrl() ?>">
@@ -14,23 +15,12 @@
                                     </h5>
                                 </a>
                                 <ul class="rating d-flex">
-                                    <li class="bi-star">
-
-                                    </li>
-                                    <li class="bi-star">
-
-                                    </li>
-                                    <li class="bi-star">
-
-                                    </li>
-                                    <li class="bi-star">
-
-                                    </li>
-                                    <li class="bi-star">
-
-                                    </li>
+                                    <li class="bi-star"></li>
+                                    <li class="bi-star"></li>
+                                    <li class="bi-star"></li>
+                                    <li class="bi-star"></li>
+                                    <li class="bi-star"></li>
                                 </ul>
-
                                 <span class="des">this is decscription</span> <br>
                                 <h3 class="price">$<?= str_replace('.000000', '', $item->getPrice()) ?></h3>
                                 <div class="add-cart d-flex justify-content-between">
@@ -39,6 +29,7 @@
                                     <i class="bi-heart add-to-wishlist"></i>
                                 </div>
                             </div>
+                            </form>
                         <?php } ?>
                     </div>
                 </div>
@@ -49,36 +40,20 @@
 <?php endif; ?>
 
 <script>
-    require([
+     require([
         "jquery",
     ], function($) {
         "use strict";
-        $("button.add-to-cart").click(function(e) {
-            e.preventDefault();
-            const antiCsrf = $(
-                    'input[name="form_key"][type="hidden"]'
-                )
-                .val()
-                .trim();
-            const id = $(this).data("id");
-            const url = `/checkout/cart/add/product/${id}`;
-            $.post(url, {
-                form_key: antiCsrf,
-            });
-        });
-
-        $("i.add-to-wishlist").click(function(e) {
-            console.log("vcl");
-            const antiCsrf = $(
-                    'input[name="form_key"][type="hidden"]'
-                )
-                .val()
-                .trim();
-            const id = $(this).siblings("button").data("id");
-            const url = `/wishlist/index/add/product/${id}`;
-            $.post(url, {
-                form_key: antiCsrf,
-            });
-        });
+        $('button.add-to-cart').click(function(e) {
+            e.preventDefault()
+            const id = $(this).data('id')
+            const url = $('input[name="url-add-to-cart"][type="hidden"]').val().trim()+ `product/${id}`
+            const antiCsrf = $('input[name="form_key"][type="hidden"]').val().trim()
+            $.post(url,{
+                "form_key" : antiCsrf
+            },rsp=>{
+               
+            })
+        })
     });
 </script>

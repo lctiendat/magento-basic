@@ -87,6 +87,7 @@ nav.navigation {
 
 .page-header {
     background: #044235 !important;
+    margin-bottom: 0 !important;
 }
 
 .navigation ul li a span {
@@ -193,7 +194,7 @@ a {
 }
 
 .recommendations .product img {
-    max-height: 200px;
+    height: 200px;
     object-fit: contain;
 }
 
@@ -217,7 +218,6 @@ a {
     font-size: 18px !important;
     margin-left: 5px;
     color: #ccc;
-
 }
 
 .recommendations .product .rating {
@@ -226,14 +226,10 @@ a {
 }
 
 .recommendations .product .des {
-    color:
-        #004236;
-    display:
-        inline;
-    font-size:
-        14px;
-    text-align:
-        left;
+    color:#004236;
+    display:inline;
+    font-size:14px;
+    text-align:left;
     margin-top: 10px;
 }
 

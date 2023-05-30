@@ -18,32 +18,18 @@ require(["jquery"], function ($) {
         }
     });
 
-    // $(".recommendations .product button.add-to-cart").click(function (e) {
-    //     e.preventDefault();
-    //     const antiCsrf = $(
-    //         '.recommendations .product input[name="form_key"][type="hidden"]'
-    //     )
-    //         .val()
-    //         .trim();
-    //     const id = $(this).data("id");
-    //     const url = `/checkout/cart/add/product/${id}`;
-    //     $.post(url, {
-    //         form_key: antiCsrf,
-    //     });
-    // });
+    $("i.add-to-wishlist").click(function (e) {
+        e.preventDefault();
+        const form = $(this).closest("form");
+        const id = form.attr("data-id");
 
-    // $(".recommendations .product i.add-to-wishlist").click(function (e) {
-    //     console.log("vcl");
-    //     const antiCsrf = $(
-    //         '.recommendations .product input[name="form_key"][type="hidden"]'
-    //     )
-    //         .val()
-    //         .trim();
-    //     const id = $(this).siblings("button").data("id");
-    //     const url = `/wishlist/index/add/product/${id}`;
-    //     $.post(url, {
-    //         form_key: antiCsrf,
-    //     });
-    // });
+        var url = "/wishlist/index/add/";
+        var data = {
+            action: "add-to-wishlist",
+            form_key: $('input[name="form_key"]').val().trim(),
+            product: id,
+        };
 
+        $.post(url,data)
+    });
 });
